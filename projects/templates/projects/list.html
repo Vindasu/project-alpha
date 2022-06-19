@@ -3,6 +3,9 @@
     <main>
         <div>
             <h1>My Projects</h1>
+            <li class="nav-item">
+                <a href="{% url 'create_project' %}">Create a new project</a>
+            </li>
             {% if not list_projects %}
                 <p>You are not assigned to any projects</p>
             {% else %}
@@ -16,8 +19,10 @@
                     {% for project in list_projects %}
                         <tbody>
                             <tr>
-                                <td>{{ project.name }}</td>
-                                <td></td>
+                                <td>
+                                    <a href="{% url 'show_project' project.pk %}">{{ project.name }}</a>
+                                </td>
+                                <td>{{ tasks|length }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
