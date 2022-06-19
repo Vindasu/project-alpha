@@ -38,6 +38,8 @@ def show_tasks(request):
     return render(request, "tasks/list.html", context)
 
 
+# function views make me cry
+
 # @login_required
 # def show_update(request, pk):
 #     status = Task.objects.get(is_completed=False)
