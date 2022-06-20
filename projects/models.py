@@ -6,7 +6,7 @@ from django.conf import settings
 
 class Project(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(null=True)
+    description = models.TextField(null=False)
     members = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="projects"
     )

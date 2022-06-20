@@ -8,13 +8,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-class RecipeDetailView(DetailView, LoginRequiredMixin):
+class ProjectDetailView(DetailView, LoginRequiredMixin):
     model = Project
     template_name = "projects/detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["project_form"] = ProjectForm()
         return context
 
 

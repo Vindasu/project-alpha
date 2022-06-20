@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+# from projects import models as projects
+
 # Create your models here.
 
 
@@ -9,6 +11,9 @@ class Task(models.Model):
     start_date = models.DateTimeField()
     due_date = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
+    # project = models.ForeignKey(
+    #     projects.Project, related_name="tasks", on_delete=models.CASCADE
+    # )
     project = models.ForeignKey(
         "projects.Project", related_name="tasks", on_delete=models.CASCADE
     )

@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from tasks.forms import TaskForm
 from django.contrib.auth.decorators import login_required
 from tasks.models import Task
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -15,20 +15,27 @@ class TaskUpdateView(UpdateView):
     success_url = reverse_lazy("show_my_tasks")
 
 
-@login_required
-def show_create_task(request):
-    if request.method == "POST":
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            project = form.save(commit=False)
-            project.save()
-            return redirect("show_projects")
-    else:
-        form = TaskForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "projects/create.html", context)
+class TaskCreateView(CreateView, LoginRequiredMixin):
+    model = Task
+    template_name = "tasks/create.html"
+    fields = ["name", "start_date", "due_date", "project", "assignee"]
+    success_url = reverse_lazy("show_project")
+
+
+# @login_required
+# def show_create_task(request):
+#     if request.method == "POST":
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             project = form.save(commit=False)
+#             project.save()
+#             return redirect("show_project")
+#     else:
+#         form = TaskForm()
+#     context = {
+#         "form": form,
+#     }
+#     return render(request, "tasks/create.html", context)
 
 
 @login_required
