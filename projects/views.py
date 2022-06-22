@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from projects.models import Project
+from tasks.models import Task
 from django.contrib.auth.decorators import login_required
 from projects.forms import ProjectForm
 from django.views.generic.detail import DetailView
@@ -13,7 +14,8 @@ class ProjectDetailView(DetailView, LoginRequiredMixin):
     template_name = "projects/detail.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        context["tasks"] = Task.objects.all()
         return context
 
 
@@ -38,7 +40,7 @@ def show_create_project(request):
         if form.is_valid():
             project = form.save(commit=False)
             project.save()
-            return redirect("show_projects")
+            return redirect("show_project")
     else:
         form = ProjectForm()
     context = {
