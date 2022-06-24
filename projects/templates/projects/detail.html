@@ -10,8 +10,8 @@
             <li class="nav-item">
                 <a href="{% url 'create_task' %}">Create a new task</a>
             </li>
-            {% if task in objects.task_set.all %}
-                {% for task in objects.task_set.all %}
+            {% if task in task.tasks.all %}
+                {% for task in task.tasks.all %}
                     <table>
                         <thead>
                             <tr>
@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ task.name }}</td>
+                                <td>{{ task.tasks.name }}</td>
                                 <td>{{ task.assignee }}</td>
                                 <td>{{ task.start_date }}</td>
                                 <td>{{ task.due_date }}</td>
@@ -48,13 +48,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        {% for task in Project.objects.all %}
-                            <td>{{ Project.task.name }}</td>
-                            <td>{{ project.projects.task_set.get.assignee }}</td>
-                            <td>{{ project.projects.task.get.start_date }}</td>
-                            <td>{{ project.task_set.get.due_date }}</td>
-                            <td>{{ project.task.get.is_completed }}</td>
-                        {% endfor %}
+                        <td>{{ task.tasks.name }}</td>
+                        <td>{{ task.tasks.assignee }}</td>
+                        <td>{{ task.start_date }}</td>
+                        <td>{{ task.due_date }}</td>
+                        <td>{{ task.is_completed }}</td>
                     </tr>
                 </tbody>
             </table>
