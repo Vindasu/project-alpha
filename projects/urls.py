@@ -3,7 +3,6 @@ from projects.views import (
     show_projects,
     show_create_project,
     ProjectDetailView,
-    # show_project,
 )
 
 urlpatterns = [
@@ -11,5 +10,3 @@ urlpatterns = [
     path("<int:pk>/", ProjectDetailView.as_view(), name="show_project"),
     path("create/", show_create_project, name="create_project"),
 ]
-
-# path("<int:pk>/", show_project, name="show_project")

@@ -28,34 +28,3 @@ class TaskCreateView(CreateView, LoginRequiredMixin):
     template_name = "tasks/create.html"
     fields = ["name", "start_date", "due_date", "project", "assignee"]
     success_url = reverse_lazy("show_project")
-
-
-# @login_required
-# def show_create_task(request):
-#     if request.method == "POST":
-#         form = TaskForm(request.POST)
-#         if form.is_valid():
-#             project = form.save(commit=False)
-#             project.save()
-#             return redirect("show_project")
-#     else:
-#         form = TaskForm()
-#     context = {
-#         "form": form,
-#     }
-#     return render(request, "tasks/create.html", context)
-
-
-# @login_required
-# def show_update(request, pk):
-#     status = Task.objects.get(is_completed=False)
-#     form = TaskForm(instance=status)
-#     if request.method == "POST":
-#         form = TaskForm(request.POST, instance=status)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("show_my_tasks")
-#         else:
-#             form = TaskForm()
-#     context = {"form": form}
-#     return render(request, "tasks/list.html", context)
